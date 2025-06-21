@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Explorando o Conhecimento</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo Explorando o Conhecimento">
+                <h1>Explorando o Conhecimento</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="cursos.html" class="active">Cursos</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Nossos Cursos</h2>
+                <p>Descubra uma ampla variedade de cursos para impulsionar sua carreira</p>
+            </div>
+        </section>
+
+        <section class="courses-content">
+            <div class="container">
+                <div class="courses-filter">
+                    <h3>Categorias de Cursos</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-category="all">Todos</button>
+                        <button class="filter-btn" data-category="tecnologia">Tecnologia</button>
+                        <button class="filter-btn" data-category="negocios">Negócios</button>
+                        <button class="filter-btn" data-category="design">Design</button>
+                        <button class="filter-btn" data-category="idiomas">Idiomas</button>
+                    </div>
+                </div>
+
+                <div class="courses-grid">
+                    <div class="course-card" data-category="tecnologia">
+                        <img src="images/course-web.jpg" alt="Curso de Desenvolvimento Web">
+                        <div class="course-info">
+                            <h3>Desenvolvimento Web Completo</h3>
+                            <p>Aprenda HTML, CSS, JavaScript e frameworks modernos para criar sites incríveis.</p>
+                            <div class="course-details">
+                                <span class="duration">40 horas</span>
+                                <span class="level">Iniciante</span>
+                                <span class="price">R$ 299,00</span>
+                            </div>
+                            <a href="#" class="btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="negocios">
+                        <img src="images/course-marketing.jpg" alt="Curso de Marketing Digital">
+                        <div class="course-info">
+                            <h3>Marketing Digital Estratégico</h3>
+                            <p>Domine as principais estratégias de marketing digital e impulsione seu negócio.</p>
+                            <div class="course-details">
+                                <span class="duration">30 horas</span>
+                                <span class="level">Intermediário</span>
+                                <span class="price">R$ 399,00</span>
+                            </div>
+                            <a href="#" class="btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="design">
+                        <img src="images/course-design.jpg" alt="Curso de Design Gráfico">
+                        <div class="course-info">
+                            <h3>Design Gráfico Profissional</h3>
+                            <p>Desenvolva habilidades em design gráfico usando as melhores ferramentas do mercado.</p>
+                            <div class="course-details">
+                                <span class="duration">35 horas</span>
+                                <span class="level">Iniciante</span>
+                                <span class="price">R$ 349,00</span>
+                            </div>
+                            <a href="#" class="btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="tecnologia">
+                        <img src="images/course-python.jpg" alt="Curso de Python">
+                        <div class="course-info">
+                            <h3>Python para Iniciantes</h3>
+                            <p>Aprenda uma das linguagens de programação mais populares do mundo.</p>
+                            <div class="course-details">
+                                <span class="duration">25 horas</span>
+                                <span class="level">Iniciante</span>
+                                <span class="price">R$ 249,00</span>
+                            </div>
+                            <a href="#" class="btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="idiomas">
+                        <img src="images/course-english.jpg" alt="Curso de Inglês">
+                        <div class="course-info">
+                            <h3>Inglês para Negócios</h3>
+                            <p>Desenvolva fluência em inglês focado no ambiente corporativo e profissional.</p>
+                            <div class="course-details">
+                                <span class="duration">50 horas</span>
+                                <span class="level">Intermediário</span>
+                                <span class="price">R$ 449,00</span>
+                            </div>
+                            <a href="#" class="btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+
+                    <div class="course-card" data-category="negocios">
+                        <img src="images/course-finance.jpg" alt="Curso de Finanças">
+                        <div class="course-info">
+                            <h3>Gestão Financeira Pessoal</h3>
+                            <p>Aprenda a organizar suas finanças e investir de forma inteligente.</p>
+                            <div class="course-details">
+                                <span class="duration">20 horas</span>
+                                <span class="level">Iniciante</span>
+                                <span class="price">R$ 199,00</span>
+                            </div>
+                            <a href="#" class="btn-secondary">Saiba Mais</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="course-benefits">
+                    <h3>Benefícios dos Nossos Cursos</h3>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <h4>Certificado Reconhecido</h4>
+                            <p>Receba um certificado válido ao concluir o curso</p>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>Suporte Especializado</h4>
+                            <p>Tire suas dúvidas com nossos instrutores experientes</p>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>Acesso Vitalício</h4>
+                            <p>Acesse o conteúdo quantas vezes quiser, para sempre</p>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>Projetos Práticos</h4>
+                            <p>Aplique o conhecimento em projetos reais</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <p>Email: contato@explorandoconhecimento.com</p>
+                    <p>Telefone: (11) 9999-9999</p>
+                    <p>Endereço: Rua do Conhecimento, 123 - São Paulo, SP</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link">Facebook</a>
+                        <a href="#" class="social-link">Instagram</a>
+                        <a href="#" class="social-link">LinkedIn</a>
+                        <a href="#" class="social-link">YouTube</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li><a href="#">Política de Privacidade</a></li>
+                        <li><a href="#">Termos de Uso</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Explorando o Conhecimento. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
