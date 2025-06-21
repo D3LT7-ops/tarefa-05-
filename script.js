@@ -1,3 +1,7 @@
+// Arquivo JavaScript para estilização dinâmica e música de fundo
+// Explorando o Conhecimento - Site Educacional
+
+// ========== CONFIGURAÇÃO DE MÚSICA DE FUNDO ==========
 class MusicaFundo {
     constructor() {
         this.audio = null;
@@ -7,18 +11,11 @@ class MusicaFundo {
     }
 
     inicializar() {
-       
         this.audio = document.createElement('audio');
         this.audio.loop = true;
         this.audio.volume = this.volume;
-        
-        
         this.audio.src = 'https://www.bensound.com/bensound-music/bensound-ukulele.mp3';
-        
-        
         document.body.appendChild(this.audio);
-        
-        
         this.configurarReproducao();
     }
 
@@ -32,7 +29,7 @@ class MusicaFundo {
                 document.removeEventListener('click', iniciarMusica);
             }
         };
-        
+
         document.addEventListener('click', iniciarMusica, { once: true });
     }
 
@@ -50,6 +47,7 @@ class MusicaFundo {
     }
 }
 
+// ========== ESTILIZAÇÃO DINÂMICA ==========
 class EstilizacaoDinamica {
     constructor() {
         this.inicializar();
@@ -62,28 +60,26 @@ class EstilizacaoDinamica {
     }
 
     adicionarEfeitosHover() {
-        
         const courseCards = document.querySelectorAll('.course-card');
         courseCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translateY(-15px) scale(1.02)';
                 card.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0) scale(1)';
                 card.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
             });
         });
 
-        
         const botoes = document.querySelectorAll('.btn-primary, .btn-secondary');
         botoes.forEach(botao => {
             botao.addEventListener('mouseenter', () => {
                 botao.style.boxShadow = '0 8px 25px rgba(0,0,0,0.3)';
                 botao.style.transform = 'translateY(-5px)';
             });
-            
+
             botao.addEventListener('mouseleave', () => {
                 botao.style.boxShadow = 'none';
                 botao.style.transform = 'translateY(0)';
@@ -92,7 +88,6 @@ class EstilizacaoDinamica {
     }
 
     configurarAnimacoes() {
-        
         const observador = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -102,7 +97,6 @@ class EstilizacaoDinamica {
             });
         });
 
-        
         const elementos = document.querySelectorAll('.feature-card, .course-card, .stat-card');
         elementos.forEach((elemento, index) => {
             elemento.style.opacity = '0';
@@ -113,10 +107,9 @@ class EstilizacaoDinamica {
     }
 
     adicionarEstilosPersonalizados() {
-        
         const hero = document.querySelector('.hero');
         if (hero) {
-            hero.style.background = 'linear-gradient(135deg, #ff6b6b, #ffa726, #4ecdc4)';
+            hero.style.background = 'linear-gradient(135deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-primaria))';
             hero.style.backgroundSize = '300% 300%';
             hero.style.animation = 'gradientShift 8s ease infinite';
         }
@@ -128,11 +121,11 @@ class EstilizacaoDinamica {
                 50% { background-position: 100% 50%; }
                 100% { background-position: 0% 50%; }
             }
-            
+
             .pulse {
                 animation: pulse 2s infinite;
             }
-            
+
             @keyframes pulse {
                 0% { transform: scale(1); }
                 50% { transform: scale(1.05); }
@@ -143,6 +136,7 @@ class EstilizacaoDinamica {
     }
 }
 
+// ========== FUNCIONALIDADES INTERATIVAS ==========
 class FuncionalidadesInterativas {
     constructor() {
         this.inicializar();
@@ -160,9 +154,7 @@ class FuncionalidadesInterativas {
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
-                // Remover classe ativa de todos os botões
                 filterButtons.forEach(btn => btn.classList.remove('active'));
-                // Adicionar classe ativa ao botão clicado
                 button.classList.add('active');
 
                 const category = button.getAttribute('data-category');
@@ -178,7 +170,6 @@ class FuncionalidadesInterativas {
             });
         });
 
-        // Adicionar animação fadeIn
         const style = document.createElement('style');
         style.textContent = `
             @keyframes fadeIn {
@@ -194,8 +185,7 @@ class FuncionalidadesInterativas {
         if (form) {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                
-                
+
                 const nome = document.getElementById('nome')?.value;
                 const email = document.getElementById('email')?.value;
                 const assunto = document.getElementById('assunto')?.value;
@@ -207,7 +197,6 @@ class FuncionalidadesInterativas {
                     return;
                 }
 
-                
                 this.mostrarNotificacao('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'sucesso');
                 form.reset();
             });
@@ -238,7 +227,6 @@ class FuncionalidadesInterativas {
     }
 
     adicionarEfeitosEspeciais() {
-        
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
@@ -247,7 +235,6 @@ class FuncionalidadesInterativas {
             }
         });
 
-        
         const logo = document.querySelector('.logo img');
         if (logo) {
             logo.classList.add('pulse');
@@ -255,65 +242,17 @@ class FuncionalidadesInterativas {
     }
 }
 
-class ControleTema {
-    constructor() {
-        this.temaEscuro = false;
-        this.criarBotaoTema();
-    }
-
-    criarBotaoTema() {
-        const botao = document.createElement('button');
-        botao.innerHTML = '🌙';
-        botao.style.cssText = `
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            background: #2c5aa0;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        `;
-
-        botao.addEventListener('click', () => {
-            this.alternarTema();
-        });
-
-        document.body.appendChild(botao);
-        this.botaoTema = botao;
-    }
-
-    alternarTema() {
-        this.temaEscuro = !this.temaEscuro;
-        
-        if (this.temaEscuro) {
-            document.body.style.filter = 'invert(1) hue-rotate(180deg)';
-            this.botaoTema.innerHTML = '☀️';
-        } else {
-            document.body.style.filter = 'none';
-            this.botaoTema.innerHTML = '🌙';
-        }
-    }
-}
-
+// ========== INICIALIZAÇÃO ==========
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎵 Inicializando site Explorando o Conhecimento...');
-    
+
     const musicaFundo = new MusicaFundo();
     const estilizacao = new EstilizacaoDinamica();
     const funcionalidades = new FuncionalidadesInterativas();
-    const controleTema = new ControleTema();
-    
+
     console.log('✅ Site carregado com sucesso!');
-    
-    // Disponibilizar controles globais
+
     window.siteControls = {
-        musica: musicaFundo,
-        tema: controleTema
+        musica: musicaFundo
     };
 });
