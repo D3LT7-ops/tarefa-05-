@@ -18,11 +18,14 @@ body {
     line-height: 1.6;
     color: var(--cor-texto);
 }
+
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 }
+
 header {
     background: linear-gradient(135deg, var(--cor-primaria), var(--cor-destaque));
     color: white;
