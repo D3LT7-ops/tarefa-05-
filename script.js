@@ -1,7 +1,3 @@
-// Arquivo JavaScript para estilização dinâmica e música de fundo
-// Explorando o Conhecimento - Site Educacional
-
-// ========== CONFIGURAÇÃO DE MÚSICA DE FUNDO ==========
 class MusicaFundo {
     constructor() {
         this.audio = null;
@@ -11,18 +7,18 @@ class MusicaFundo {
     }
 
     inicializar() {
-        // Criar elemento de áudio
+       
         this.audio = document.createElement('audio');
         this.audio.loop = true;
         this.audio.volume = this.volume;
         
-        // URL da música de fundo (Bensound - royalty free)
+        
         this.audio.src = 'https://www.bensound.com/bensound-music/bensound-ukulele.mp3';
         
-        // Adicionar ao DOM
+        
         document.body.appendChild(this.audio);
         
-        // Reproduzir após primeira interação do usuário
+        
         this.configurarReproducao();
     }
 
@@ -54,7 +50,6 @@ class MusicaFundo {
     }
 }
 
-// ========== ESTILIZAÇÃO DINÂMICA ==========
 class EstilizacaoDinamica {
     constructor() {
         this.inicializar();
@@ -67,7 +62,7 @@ class EstilizacaoDinamica {
     }
 
     adicionarEfeitosHover() {
-        // Efeitos para cards de curso
+        
         const courseCards = document.querySelectorAll('.course-card');
         courseCards.forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -81,7 +76,7 @@ class EstilizacaoDinamica {
             });
         });
 
-        // Efeitos para botões
+        
         const botoes = document.querySelectorAll('.btn-primary, .btn-secondary');
         botoes.forEach(botao => {
             botao.addEventListener('mouseenter', () => {
@@ -97,7 +92,7 @@ class EstilizacaoDinamica {
     }
 
     configurarAnimacoes() {
-        // Animação de entrada para elementos
+        
         const observador = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -107,7 +102,7 @@ class EstilizacaoDinamica {
             });
         });
 
-        // Aplicar animação aos cards
+        
         const elementos = document.querySelectorAll('.feature-card, .course-card, .stat-card');
         elementos.forEach((elemento, index) => {
             elemento.style.opacity = '0';
@@ -118,7 +113,7 @@ class EstilizacaoDinamica {
     }
 
     adicionarEstilosPersonalizados() {
-        // Adicionar gradientes dinâmicos
+        
         const hero = document.querySelector('.hero');
         if (hero) {
             hero.style.background = 'linear-gradient(135deg, #ff6b6b, #ffa726, #4ecdc4)';
@@ -126,7 +121,6 @@ class EstilizacaoDinamica {
             hero.style.animation = 'gradientShift 8s ease infinite';
         }
 
-        // Adicionar animação de gradiente
         const style = document.createElement('style');
         style.textContent = `
             @keyframes gradientShift {
@@ -149,7 +143,6 @@ class EstilizacaoDinamica {
     }
 }
 
-// ========== FUNCIONALIDADES INTERATIVAS ==========
 class FuncionalidadesInterativas {
     constructor() {
         this.inicializar();
@@ -202,7 +195,7 @@ class FuncionalidadesInterativas {
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
-                // Validação básica
+                
                 const nome = document.getElementById('nome')?.value;
                 const email = document.getElementById('email')?.value;
                 const assunto = document.getElementById('assunto')?.value;
@@ -214,7 +207,7 @@ class FuncionalidadesInterativas {
                     return;
                 }
 
-                // Simulação de envio
+                
                 this.mostrarNotificacao('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'sucesso');
                 form.reset();
             });
@@ -245,7 +238,7 @@ class FuncionalidadesInterativas {
     }
 
     adicionarEfeitosEspeciais() {
-        // Efeito de paralaxe no hero
+        
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const hero = document.querySelector('.hero');
@@ -254,7 +247,7 @@ class FuncionalidadesInterativas {
             }
         });
 
-        // Adicionar classe pulse ao logo
+        
         const logo = document.querySelector('.logo img');
         if (logo) {
             logo.classList.add('pulse');
@@ -262,7 +255,6 @@ class FuncionalidadesInterativas {
     }
 }
 
-// ========== CONTROLE DE TEMA ==========
 class ControleTema {
     constructor() {
         this.temaEscuro = false;
@@ -309,11 +301,9 @@ class ControleTema {
     }
 }
 
-// ========== INICIALIZAÇÃO ==========
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎵 Inicializando site Explorando o Conhecimento...');
     
-    // Inicializar todas as funcionalidades
     const musicaFundo = new MusicaFundo();
     const estilizacao = new EstilizacaoDinamica();
     const funcionalidades = new FuncionalidadesInterativas();

@@ -1,11 +1,9 @@
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Variáveis CSS */
 :root {
     --cor-primaria: #2c5aa0;
     --cor-secundaria: #4ecdc4;
@@ -17,21 +15,21 @@
     --fonte-corpo: 'Open Sans', sans-serif;
 }
 
-/* Configurações gerais */
+
 body {
     font-family: var(--fonte-principal);
     line-height: 1.6;
     color: var(--cor-texto);
 }
 
-/* Container centralizado */
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* Header */
+
 header {
     background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
     color: white;
@@ -65,7 +63,7 @@ header .container {
     font-size: 1.8rem;
 }
 
-/* Navegação */
+
 nav ul {
     display: flex;
     list-style: none;
@@ -89,7 +87,7 @@ nav a.active {
     background-color: var(--cor-destaque);
 }
 
-/* Seções principais */
+
 section {
     padding: 60px 0;
 }
@@ -107,7 +105,7 @@ section {
     margin-bottom: 15px;
 }
 
-/* Hero Section */
+
 .hero {
     background: linear-gradient(135deg, var(--cor-destaque), #ffa726);
     color: white;
@@ -143,7 +141,7 @@ section {
     border-radius: 15px;
 }
 
-/* Botões */
+
 .btn-primary, .btn-secondary {
     display: inline-block;
     padding: 15px 30px;
@@ -169,7 +167,7 @@ section {
     transform: translateY(-3px);
 }
 
-/* Grids flexbox */
+
 .features-grid, .stats-grid, .courses-grid, .benefits-grid {
     display: flex;
     gap: 30px;
@@ -193,14 +191,14 @@ section {
     transform: translateY(-10px);
 }
 
-/* Títulos */
+
 h2, h3 {
     font-family: var(--fonte-titulo);
     color: var(--cor-primaria);
     margin-bottom: 20px;
 }
 
-/* Formulário */
+
 .contact-grid {
     display: flex;
     gap: 50px;
@@ -235,7 +233,7 @@ h2, h3 {
     outline: none;
 }
 
-/* Footer */
+
 footer {
     background: var(--cor-texto);
     color: white;
@@ -274,7 +272,6 @@ footer {
     background: var(--cor-primaria);
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .hero .container, .contact-grid, .footer-content {
         flex-direction: column;
