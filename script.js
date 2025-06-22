@@ -1,166 +1,112 @@
-// Arquivo JavaScript para estilização dinâmica e música de fundo
-// Explorando o Conhecimento - Site Educacional
-
-// ========== CONFIGURAÇÃO DE MÚSICA DE FUNDO ==========
-class MusicaFundo {
+const CONFIG = {
+    musicVolume: 0.3,
+    musicUrl: 'https://www.bensound.com/bensound-music/bensound-ukulele.mp3',
+    animationDelay: 100
+};
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
+class SiteManager {
     constructor() {
         this.audio = null;
-        this.inicializada = false;
-        this.volume = 0.3;
-        this.inicializar();
+        this.musicStarted = false;
+        this.init();
     }
-
-    inicializar() {
+    init() {
+        this.setupMusic();
+        this.setupAnimations();
+        this.setupInteractions();
+        this.setupFilters();
+        this.setupForm();
+        console.log('✅ Site carregado com sucesso!');
+    }
+    setupMusic() {
         this.audio = document.createElement('audio');
         this.audio.loop = true;
-        this.audio.volume = this.volume;
-        this.audio.src = 'https://www.bensound.com/bensound-music/bensound-ukulele.mp3';
+        this.audio.volume = CONFIG.musicVolume;
+        this.audio.src = CONFIG.musicUrl;
         document.body.appendChild(this.audio);
-        this.configurarReproducao();
-    }
-
-    configurarReproducao() {
-        const iniciarMusica = () => {
-            if (!this.inicializada) {
-                this.audio.play().catch(e => {
-                    console.log('Erro ao reproduzir música:', e);
-                });
-                this.inicializada = true;
-                document.removeEventListener('click', iniciarMusica);
+        document.addEventListener('click', () => {
+            if (!this.musicStarted) {
+                this.audio.play().catch(e => console.log('Música não pôde ser reproduzida:', e));
+                this.musicStarted = true;
             }
-        };
-
-        document.addEventListener('click', iniciarMusica, { once: true });
+        }, { once: true });
     }
-
-    pausar() {
-        this.audio.pause();
-    }
-
-    reproduzir() {
-        this.audio.play();
-    }
-
-    alterarVolume(novoVolume) {
-        this.volume = novoVolume;
-        this.audio.volume = novoVolume;
-    }
-}
-
-// ========== ESTILIZAÇÃO DINÂMICA ==========
-class EstilizacaoDinamica {
-    constructor() {
-        this.inicializar();
-    }
-
-    inicializar() {
-        this.adicionarEfeitosHover();
-        this.configurarAnimacoes();
-        this.adicionarEstilosPersonalizados();
-    }
-
-    adicionarEfeitosHover() {
-        const courseCards = document.querySelectorAll('.course-card');
-        courseCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-15px) scale(1.02)';
-                card.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
-            });
-
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0) scale(1)';
-                card.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-            });
-        });
-
-        const botoes = document.querySelectorAll('.btn-primary, .btn-secondary');
-        botoes.forEach(botao => {
-            botao.addEventListener('mouseenter', () => {
-                botao.style.boxShadow = '0 8px 25px rgba(0,0,0,0.3)';
-                botao.style.transform = 'translateY(-5px)';
-            });
-
-            botao.addEventListener('mouseleave', () => {
-                botao.style.boxShadow = 'none';
-                botao.style.transform = 'translateY(0)';
-            });
-        });
-    }
-
-    configurarAnimacoes() {
-        const observador = new IntersectionObserver((entries) => {
+    setupAnimations() {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('fade-in');
                 }
             });
+        }, { threshold: 0.1 });
+        $$('.feature-card, .course-card, .stat-card, .benefit-item').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = `all 0.6s ease ${i * CONFIG.animationDelay}ms`;
+            observer.observe(el);
         });
-
-        const elementos = document.querySelectorAll('.feature-card, .course-card, .stat-card');
-        elementos.forEach((elemento, index) => {
-            elemento.style.opacity = '0';
-            elemento.style.transform = 'translateY(30px)';
-            elemento.style.transition = `all 0.6s ease ${index * 0.1}s`;
-            observador.observe(elemento);
-        });
+        const logo = $('.logo img');
+        if (logo) logo.classList.add('pulse');
+        this.animateHeroGradient();
     }
-
-    adicionarEstilosPersonalizados() {
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            hero.style.background = 'linear-gradient(135deg, var(--cor-destaque), var(--cor-secundaria), var(--cor-primaria))';
-            hero.style.backgroundSize = '300% 300%';
-            hero.style.animation = 'gradientShift 8s ease infinite';
-        }
-
+    animateHeroGradient() {
+        const hero = $('.hero');
+        if (!hero) return;
         const style = document.createElement('style');
         style.textContent = `
+            .hero {
+                background: linear-gradient(135deg, var(--accent), var(--secondary), var(--primary)) !important;
+                background-size: 300% 300% !important;
+                animation: gradientShift 8s ease infinite !important;
+            }
             @keyframes gradientShift {
                 0% { background-position: 0% 50%; }
                 50% { background-position: 100% 50%; }
                 100% { background-position: 0% 50%; }
             }
-
-            .pulse {
-                animation: pulse 2s infinite;
-            }
-
-            @keyframes pulse {
-                0% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-                100% { transform: scale(1); }
-            }
         `;
         document.head.appendChild(style);
     }
-}
-
-// ========== FUNCIONALIDADES INTERATIVAS ==========
-class FuncionalidadesInterativas {
-    constructor() {
-        this.inicializar();
+    setupInteractions() {
+        $$('.course-card, .feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.02)';
+                card.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            });
+        });
+        $$('.btn-primary, .btn-secondary').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.boxShadow = '0 8px 25px rgba(0,0,0,0.3)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.boxShadow = 'none';
+            });
+        });
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = $('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
     }
-
-    inicializar() {
-        this.configurarFiltrosCursos();
-        this.configurarFormulario();
-        this.adicionarEfeitosEspeciais();
-    }
-
-    configurarFiltrosCursos() {
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const courseCards = document.querySelectorAll('.course-card');
-
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-
-                const category = button.getAttribute('data-category');
-
+    setupFilters() {
+        const filterBtns = $$('.filter-btn');
+        const courseCards = $$('.course-card');
+        if (!filterBtns.length || !courseCards.length) return;
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const category = btn.dataset.category;
                 courseCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
+                    const shouldShow = category === 'all' || card.dataset.category === category;
+                    if (shouldShow) {
                         card.style.display = 'block';
                         card.style.animation = 'fadeIn 0.5s ease';
                     } else {
@@ -169,90 +115,83 @@ class FuncionalidadesInterativas {
                 });
             });
         });
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeIn {
-                from { opacity: 0; transform: scale(0.9); }
-                to { opacity: 1; transform: scale(1); }
+    }
+    setupForm() {
+        const form = $('#contactForm');
+        if (!form) return;
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const requiredFields = ['nome', 'email', 'assunto', 'mensagem'];
+            const termos = $('input[name="termos"]');
+            const isValid = requiredFields.every(field => {
+                const input = $(`#${field}`);
+                return input && input.value.trim();
+            }) && termos && termos.checked;
+            if (!isValid) {
+                this.showNotification('Por favor, preencha todos os campos obrigatórios!', 'error');
+                return;
             }
-        `;
-        document.head.appendChild(style);
-    }
 
-    configurarFormulario() {
-        const form = document.getElementById('contactForm');
-        if (form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const nome = document.getElementById('nome')?.value;
-                const email = document.getElementById('email')?.value;
-                const assunto = document.getElementById('assunto')?.value;
-                const mensagem = document.getElementById('mensagem')?.value;
-                const termos = document.querySelector('input[name="termos"]')?.checked;
-
-                if (!nome || !email || !assunto || !mensagem || !termos) {
-                    this.mostrarNotificacao('Por favor, preencha todos os campos obrigatórios!', 'erro');
-                    return;
-                }
-
-                this.mostrarNotificacao('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'sucesso');
-                form.reset();
-            });
-        }
-    }
-
-    mostrarNotificacao(mensagem, tipo) {
-        const notificacao = document.createElement('div');
-        notificacao.textContent = mensagem;
-        notificacao.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            z-index: 10000;
-            animation: slideIn 0.3s ease;
-            background: ${tipo === 'sucesso' ? '#4ecdc4' : '#ff6b6b'};
-        `;
-
-        document.body.appendChild(notificacao);
-
-        setTimeout(() => {
-            notificacao.remove();
-        }, 4000);
-    }
-
-    adicionarEfeitosEspeciais() {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
+            // Simular envio
+            this.showNotification('Mensagem enviada com sucesso! Entraremos em contato em breve.', 'success');
+            form.reset();
         });
-
-        const logo = document.querySelector('.logo img');
-        if (logo) {
-            logo.classList.add('pulse');
+    }
+    showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.className = `notification notification-${type}`;
+        Object.assign(notification.style, {
+            position: 'fixed',
+            top: '20px',
+            right: '20px',
+            padding: '15px 25px',
+            borderRadius: '8px',
+            color: 'white',
+            fontWeight: 'bold',
+            zIndex: '10000',
+            animation: 'slideIn 0.3s ease',
+            background: type === 'success' ? '#33FF57' : '#FF5733',
+            maxWidth: '300px',
+            wordWrap: 'break-word'
+        });
+        document.body.appendChild(notification);
+        setTimeout(() => {
+            notification.style.animation = 'slideOut 0.3s ease';
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
+        if (!$('#notification-styles')) {
+            const style = document.createElement('style');
+            style.id = 'notification-styles';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
         }
+    }
+    pauseMusic() {
+        if (this.audio) this.audio.pause();
+    }
+    playMusic() {
+        if (this.audio) this.audio.play().catch(e => console.log('Erro ao reproduzir:', e));
+    }
+    setVolume(volume) {
+        if (this.audio) this.audio.volume = Math.max(0, Math.min(1, volume));
     }
 }
-
-// ========== INICIALIZAÇÃO ==========
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🎵 Inicializando site Explorando o Conhecimento...');
-
-    const musicaFundo = new MusicaFundo();
-    const estilizacao = new EstilizacaoDinamica();
-    const funcionalidades = new FuncionalidadesInterativas();
-
-    console.log('✅ Site carregado com sucesso!');
-
+    window.site = new SiteManager();
     window.siteControls = {
-        musica: musicaFundo
+        pauseMusic: () => window.site.pauseMusic(),
+        playMusic: () => window.site.playMusic(),
+        setVolume: (vol) => window.site.setVolume(vol)
     };
 });
